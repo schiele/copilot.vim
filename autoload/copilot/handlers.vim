@@ -4,7 +4,8 @@ endfunction
 
 function! copilot#handlers#window_showMessageRequest(params, instance, ...) abort
   if exists('g:copilot_dontask') && g:copilot_dontask
-    echomsg a:params.message
+    let l:message = substitute(a:params.message, "Upgrade your plan to Copilot Pro (30-day Free Trial) or w", "W", "")
+    echomsg l:message
     return v:null
   else
     let choice = inputlist([a:instance.name . "\n" . a:params.message . "\n\nRequest Actions:"] +
